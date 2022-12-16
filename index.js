@@ -1,3 +1,4 @@
+
 const table = document.getElementById('table')
 const tbody = document.getElementById('tbody')
 
@@ -8,9 +9,10 @@ fetch('https://6393e57e11ed187986bf9667.mockapi.io/api/curso/employees')
     for(let i=0; i< data.length; i++){
       const element = data[i];     
       let tr = document.createElement('tr');
+      const idFila = tr.id = element.id
       const tdName = createTDEmployee(element.name, tr)
       const tdButtonEditar = createButtonEmployee('Editar', 'btn btn-primary', element, getEditEmployee)
-      const tdButtonEliminar = createButtonEmployee('Eliminar', 'btn btn-danger', element, deleteEmployee)
+      const tdButtonEliminar = createButtonEmployee('Eliminar', 'btn btn-danger', element, deleteEmployee, idFila)
       tr.appendChild(tdName)
       tr.appendChild(tdButtonEditar)
       tr.appendChild(tdButtonEliminar)
@@ -26,7 +28,7 @@ function createTDEmployee(text) {
     return td
 }
 
-function createButtonEmployee(text,className,data, functionClick) {
+function createButtonEmployee(text,className,data, functionClick, idFila) {
     let tdButton = document.createElement('td');
     let button = document.createElement('button')
     button.innerText= text
@@ -35,15 +37,17 @@ function createButtonEmployee(text,className,data, functionClick) {
 
     
     button.addEventListener('click', function() {
-        functionClick(data)
+        functionClick(data, idFila)
     })
     return tdButton
 }
   
   function getEditEmployee(data) {
-    window.location.href=`form.html?id=${data.id}`;
+    window.location.href=`formularioEditar/form.html?id=${data.id}`;
   }
 
-  function deleteEmployee(data){
+  function deleteEmployee(data, idFila){
+    const tr = document.getElementById(idFila)
+    tr.hidden = true;
     alert(`El empleado ${data.name} sera eliminado `)
   }

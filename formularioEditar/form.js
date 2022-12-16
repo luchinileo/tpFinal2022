@@ -33,10 +33,7 @@ fetch(`https://6393e57e11ed187986bf9667.mockapi.io/api/curso/employees/${id}`)
       form.appendChild(inputEmail)
       form.appendChild(inputCity)
       form.appendChild(inputBirthday)
-      form.appendChild(button)
-
-
-      
+      form.appendChild(button)      
     })
 .catch(err => console.log('Hubo un problema con la petición Fetch:' + err.message))
 
@@ -58,11 +55,12 @@ function updateEmployee(e) {
     email:form.elements['email'].value,
     date: form.elements['date'].value
   }
+
+  alert(`El empleado se actualizo con el nombre ${updateEmployeData.name}`)
   console.log(updateEmployeData)
-  // window.location.href='index.html';
 }
 
 
 function goToBack() {
-    window.location.href = 'index.html'
+    window.location.href = '/'
 }
