@@ -37,7 +37,11 @@ function createButtonEmployee(text,className,data, functionClick, idFila) {
 
     
     button.addEventListener('click', function() {
+      if(idFila) {
         functionClick(data, idFila)
+      } else {
+        functionClick(data)
+      }
     })
     return tdButton
 }
@@ -50,4 +54,4 @@ function createButtonEmployee(text,className,data, functionClick, idFila) {
     const tr = document.getElementById(idFila)
     tr.hidden = true;
     alert(`El empleado ${data.name} sera eliminado `)
-  }
+  }  
